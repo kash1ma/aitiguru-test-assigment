@@ -1,21 +1,24 @@
-/**
- * This class is the controller for the main view for the application. It is specified as
- * the "controller" of the Main view class.
- *
- * TODO - Replace this content of this view to suite the needs of your application.
- */
-Ext.define('Aitiguru.view.main.MainController', {
+Ext.define('Aitiguru.view.MainController', {
     extend: 'Ext.app.ViewController',
-
     alias: 'controller.main',
 
-    onItemSelected: function (sender, record) {
-        Ext.Msg.confirm('Confirm', 'Are you sure?', 'onConfirm', this);
+    onProductsClick: function () {
+        const tabPanel = this.lookupReference('mainTabPanel') || this.getView().down('#mainTabPanel');
+
+        // Create a new Products tab
+        const newTab = tabPanel.add({
+            xtype: 'products',
+            closable: true, // Allow closing the tab
+            title: 'Products ' + (tabPanel.items.length)
+        });
+
+        // Activate the new tab
+        tabPanel.setActiveTab(newTab);
     },
 
-    onConfirm: function (choice) {
-        if (choice === 'yes') {
-            //
-        }
+    onExitClick: function () {
+        // Destroy the current viewport and go back to the Login view
+        Ext.destroy(Ext.ComponentQuery.query('viewport'));
+        Ext.create('Aitiguru.view.Login');
     }
 });

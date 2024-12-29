@@ -1,7 +1,14 @@
-
-Ext.define('Aitiguru.view.Main',{
+Ext.define('Aitiguru.view.Main', {
     extend: 'Ext.container.Viewport',
     xtype: 'main',
+
+    requires: [
+        'Ext.tab.Panel',
+        'Ext.button.Button',
+        'Aitiguru.view.Products'
+    ],
+
+    controller: 'main',
 
     layout: 'border',
 
@@ -10,13 +17,26 @@ Ext.define('Aitiguru.view.Main',{
             region: 'north',
             xtype: 'toolbar',
             items: [
-                { xtype: 'tbtext', text: 'Welcome to the Main Page!' }
+                {
+                    text: 'Products',
+                    handler: 'onProductsClick'
+                },
+                {
+                    text: 'Exit',
+                    handler: 'onExitClick'
+                }
             ]
         },
         {
             region: 'center',
-            xtype: 'panel',
-            html: '<h1>Main Page Content</h1>'
+            xtype: 'tabpanel',
+            itemId: 'mainTabPanel',
+            items: [
+                {
+                    title: 'Welcome',
+                    html: '<h1>Welcome to the Main Page!</h1>'
+                }
+            ]
         }
     ]
 });
