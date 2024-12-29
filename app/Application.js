@@ -6,34 +6,25 @@
 Ext.define('Aitiguru.Application', {
     extend: 'Ext.app.Application',
 
-    requires: [
-        'Aitiguru.view.Login'
-    ],
-
     name: 'Aitiguru',
 
-    quickTips: false,
-    platformConfig: {
-        desktop: {
-            quickTips: true
-        }
-    },
-
-    stores: [
-        // TODO: add global / shared stores here
+    requires: [
+        'Aitiguru.view.Login',
+        'Aitiguru.view.Main'
     ],
 
+    // Launch the application with the Login view
     launch: function () {
+        // Show only the Login view on application start
         Ext.create('Aitiguru.view.Login');
     },
 
-    onAppUpdate: function () {
-        Ext.Msg.confirm('Application Update', 'This application has an update, reload?',
-            function (choice) {
-                if (choice === 'yes') {
-                    window.location.reload();
-                }
-            }
-        );
+    // Transition to the Main view after successful login
+    showMainView: function () {
+        // Destroy the current viewport (Login view)
+        Ext.destroy(Ext.ComponentQuery.query('viewport'));
+
+        // Create and display the Main view
+        Ext.create('Aitiguru.view.Main');
     }
 });

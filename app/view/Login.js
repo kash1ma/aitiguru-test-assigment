@@ -13,15 +13,21 @@ Ext.define('Aitiguru.view.Login', {
     closable: false,
     autoShow: true,
 
-    layout: 'fit',
+    layout: {
+        type: 'vbox',
+        align: 'center',
+        pack: 'center'
+        },
 
     items: {
         xtype: 'form',
+        width: 300,
         bodyPadding: 10,
         defaults: {
             xtype: 'textfield',
             anchor: '100%',
-            allowBlank: false
+            allowBlank: false,
+            labelAlign: 'top',
         },
         items: [
             {
@@ -42,6 +48,9 @@ Ext.define('Aitiguru.view.Login', {
                     click: 'onLoginClick'
                 }
             }
-        ]
+        ],
+        border: true,
+        frame: true,
+        defaultType: 'textfield',
     }
 });
