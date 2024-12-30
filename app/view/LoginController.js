@@ -14,7 +14,6 @@ Ext.define('Aitiguru.view.LoginController', {
                 // Create and display the Main view
                 Ext.create('Aitiguru.view.Main');
                 // Call the application method to show the main view
-                Ext.getApplication.showMainView();
             });
         } else {
             Ext.Msg.alert('Error', 'Invalid username or password.');
