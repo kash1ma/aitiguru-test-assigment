@@ -7,9 +7,13 @@ Ext.define("Aitiguru.view.Products", {
     "Ext.form.field.Text",
     "Ext.grid.column.Number",
     "Ext.data.Store",
+    "Aitiguru.store.Products",
+    "Aitiguru.model.Product",
   ],
 
   layout: "fit",
+
+  store: "Aitiguru.store.Products",
 
   controller: "products",
 
@@ -18,30 +22,7 @@ Ext.define("Aitiguru.view.Products", {
       xtype: "grid",
       title: "Product List",
       store: {
-        fields: ["id", "name", "description", "price", "amount"],
-        data: [
-          {
-            id: 1,
-            name: "Notebook Lenovo",
-            description: "ThinkPad T460",
-            price: 100.0,
-            amount: 2,
-          },
-          {
-            id: 2,
-            name: "Keyboard OKLICK",
-            description: "OKLICK 140M",
-            price: 50.0,
-            amount: 8,
-          },
-          {
-            id: 3,
-            name: "Network adapter",
-            description: "WiFi D-Link",
-            price: 7.0,
-            amount: 0,
-          },
-        ],
+        type: "products", // Reference the store alias
       },
 
       columns: [
@@ -80,7 +61,7 @@ Ext.define("Aitiguru.view.Products", {
           labelAlign: "left",
           labelWidth: 30,
           enableKeyEvents: true,
-          itemId: "filterId", // Add itemId for easy access
+          itemId: "filterId",
           listeners: {
             specialkey: "onFilterKeyPress",
           },
@@ -91,7 +72,7 @@ Ext.define("Aitiguru.view.Products", {
           labelAlign: "left",
           labelWidth: 80,
           enableKeyEvents: true,
-          itemId: "filterDescription", // Add itemId for easy access
+          itemId: "filterDescription",
           listeners: {
             specialkey: "onFilterKeyPress",
           },
@@ -99,8 +80,8 @@ Ext.define("Aitiguru.view.Products", {
         {
           xtype: "button",
           text: "Clear Filters",
-          iconCls: "x-fa fa-times", // Optional: Add an icon for the button
-          handler: "onClearFiltersClick", // Attach the handler to the controller
+          iconCls: "x-fa fa-times",
+          handler: "onClearFiltersClick",
         },
       ],
     },

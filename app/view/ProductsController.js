@@ -2,6 +2,8 @@ Ext.define("Aitiguru.view.ProductsController", {
   extend: "Ext.app.ViewController",
   alias: "controller.products",
 
+  requires: ['Aitiguru.view.ProductCard'],
+
   onClearFiltersClick: function (button) {
     const grid = button.up("grid"),
       store = grid.getStore();
@@ -12,9 +14,19 @@ Ext.define("Aitiguru.view.ProductsController", {
     store.clearFilter();
   },
 
-  onNameClick: function (button) {
-    console.log("Name clicked", button.up("name").getValue());
+  onNameClick: function (grid, rowIndex, colIndex, item, e, record) {
+
+    if (!record || !record.isModel) {
+      console.error('Invalid record:', record);
+      return;
+    }
+    
+    Ext.create("Aitiguru.view.ProductCard", {
+      title: `Карточка товара: ${record.get("name")}`,
+      record: record,
+    }).show();
   },
+  
 
   onFilterKeyPress: function (field, e) {
     if (e.getKey() === e.ENTER) {

@@ -1,8 +1,5 @@
-Ext.define('Aitiguru.view.ProductsModel', {
-    extend: 'Ext.app.ViewModel',
-    alias: 'viewmodel.products',
-    data: {
-        name: 'Aitiguru'
-    }
-
-});
+Ext.define("Aitiguru.model.Product", {
+    extend: "Ext.data.Model",
+    fields: ["id", "name", "description", "price", "amount"],
+  });
+  
