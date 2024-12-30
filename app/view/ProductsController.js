@@ -2,6 +2,20 @@ Ext.define("Aitiguru.view.ProductsController", {
   extend: "Ext.app.ViewController",
   alias: "controller.products",
 
+  onClearFiltersClick: function (button) {
+    const grid = button.up("grid"),
+      store = grid.getStore();
+
+    grid.down("#filterId").reset();
+    grid.down("#filterDescription").reset();
+
+    store.clearFilter();
+  },
+
+  onNameClick: function (button) {
+    console.log("Name clicked", button.up("name").getValue());
+  },
+
   onFilterKeyPress: function (field, e) {
     if (e.getKey() === e.ENTER) {
       const grid = field.up("grid"),
@@ -35,6 +49,8 @@ Ext.define("Aitiguru.view.ProductsController", {
         ) {
           matches = false;
         }
+        console.log(matches);
+
         return matches;
       });
     }
